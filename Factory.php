@@ -34,13 +34,20 @@ class Factory
 
     public function __call($name, $arguments)
     {
-        echo 'create robot'.PHP_EOL;
-        var_dump(strstr($name, 'create'), $arguments);
-        echo PHP_EOL;
+        $prefix = 'create';
+        $class_name = '';
 
-        for ($i = 1; $i <= $arguments[0]; $i++)
-        {
-            //$this->robot_array[] = new $name;
+        if (strpos($name, $prefix) === 0) {
+            $class_name = substr($name, strlen($prefix));
         }
+
+        foreach ($this->robot_type_array as $type_item) {
+            if (strpos(get_class($type_item), $class_name) !== false) {
+                $this->robot_array = array_fill(0, $arguments[0], $type_item);
+                break;
+            }
+        }
+
+        return $this->robot_array;
     }
 }

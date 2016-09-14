@@ -7,10 +7,15 @@ class UnionRobot extends Robot
 
     public function addRobot($robot)
     {
-        $this->robot_array[] = $robot;
+        if (is_array($robot)) {
+           $this->robot_array = array_merge($this->robot_array, $robot);
+        } else {
+            $this->robot_array[] = $robot;
+        }
 
+        $this->speed = $this->robot_array[0]->speed;
         foreach ($this->robot_array as $robot_item) {
-            if ($this->speed < $robot_item->speed) {
+            if ($this->speed > $robot_item->speed) {
                 $this->speed = $robot_item->speed;
             }
 
