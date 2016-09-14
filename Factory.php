@@ -3,15 +3,23 @@ namespace factory;
 
 /**
  * Class Factory
+ * 
  * @package factory
  *
- * @property object $robot_type_array
+ * @property array $robot_type_array
+ * @property array $robot_array
  */
 class Factory
 {
     protected $robot_type_array = array();
     public $robot_array = array();
 
+    /**
+     * adding robot type to array $robot_type_array
+     * if robot has been added then pass it
+     *
+     * @param $robot object
+     */
     public function addType($robot)
     {
         $class_bool = false;
@@ -32,6 +40,15 @@ class Factory
         }
     }
 
+    /**
+     * creating method
+     * if $name has prefix 'create' then creating robots
+     * and return created robots array
+     *
+     * @param $name string
+     * @param $arguments array
+     * @return array
+     */
     public function __call($name, $arguments)
     {
         $prefix = 'create';

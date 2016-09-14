@@ -1,10 +1,22 @@
 <?php
 namespace factory;
 
+/**
+ * UnionRobot type of robot
+ *
+ * Class UnionRobot
+ * @package factory
+ *
+ * @property array $robot_array
+ */
 class UnionRobot extends Robot
 {
     public $robot_array = array();
 
+    /**
+     * method which make union robot and set weight, height and speed of this robot
+     * @param $robot mixed
+     */
     public function addRobot($robot)
     {
         if (is_array($robot)) {
